@@ -1,0 +1,14 @@
+version: '3'
+services:
+  gitlab-runner:
+    container_name: gitlab-runner
+    image: gitlab-runner
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    environment:
+      BUILD_DIR: $PWD/build
+    volumes:
+      - $PWD/build:/ci
+      - ./config/gitlab-runner:/etc/gitlab-runner
+      - /var/run/docker.sock:/var/run/docker.sock
